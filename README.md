@@ -63,3 +63,19 @@ gunicorn --workers 2 --bind 0.0.0.0:5000 app:application
 - 2 processes
 - no multithreading problem /not_threadsafe
 
+
+# Thread local variable
+
+- allows to store values in a threadsafe variable
+
+
+# Summary
+
+- Flask has a build-in webserver which is used for development mode
+- Flask the build-in webserver supports multithreading
+- In production, we don't use flask as a webserver but Gunicorn on top of (Elastic Beanstalk)
+- Gunicorn can run with multiple workers (=processes) and multiple threads / worker (=threads)
+- OS sees and manages the threads of the python process (no "green threads")
+- Processes have their own space of memory, threads share the memory
+- Threads can access shared global variables, Processes can not
+- We can use threadlocal variables to store values in a threadsafe way
